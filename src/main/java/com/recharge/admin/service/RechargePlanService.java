@@ -7,4 +7,11 @@ import com.recharge.admin.payload.RechargePlanDto;
 
 public interface RechargePlanService {
 	List<RechargePlan> fetchPlans();
+
+	RechargePlan createPost(RechargePlan rechargePlan);
+
+	RechargePlan updatePost(RechargePlan rechargePlan, long id);
+
+	void deleteRechargePlanById(long id);
+
 }

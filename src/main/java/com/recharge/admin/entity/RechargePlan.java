@@ -80,5 +80,8 @@ public class RechargePlan {
 	public void setAvailable(boolean isAvailable) {
 		this.isAvailable = isAvailable;
 	}
+	
+	
+	
 
 }
