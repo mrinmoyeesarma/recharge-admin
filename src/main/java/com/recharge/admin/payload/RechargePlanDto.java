@@ -12,4 +12,28 @@ public class RechargePlanDto {
 	private int validity;
 	private boolean isAvailable;
 
+	public long getPlan_id() {
+		return plan_id;
+	}
+
+	public String getNetworkProvider() {
+		return networkProvider;
+	}
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public String getPlanName() {
+		return planName;
+	}
+
+	public int getValidity() {
+		return validity;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
 }

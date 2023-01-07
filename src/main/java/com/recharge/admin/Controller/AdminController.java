@@ -5,11 +5,17 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recharge.admin.entity.RechargePlan;
+import com.recharge.admin.payload.RechargePlanDto;
 import com.recharge.admin.service.RechargePlanService;
 
 @RestController
@@ -28,4 +34,24 @@ public class AdminController {
 		return new ResponseEntity<>(rlist, HttpStatus.OK);
 	}
 
+	// Add all the rechargePlans for the rest API
+	@PostMapping
+	public ResponseEntity<RechargePlan> createPost(@RequestBody RechargePlan rechargePlan) {
+		return new ResponseEntity<>(rechargePlanService.createPost(rechargePlan), HttpStatus.CREATED);
+	}
+
+	// update post by id using rest api
+	@PutMapping("/{id}")
+	public ResponseEntity<RechargePlan> updatePost(@RequestBody RechargePlan rechargePlanDto,
+			@PathVariable(name = "id") long id) {
+		RechargePlan rechargeResponse = rechargePlanService.updatePost(rechargePlanDto, id);
+			return new ResponseEntity<>(rechargeResponse,HttpStatus.OK); 
+	}
+
+	// delete post by id using rest api
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deletePost(@PathVariable(name = "id") long id) {
+		rechargePlanService.deleteRechargePlanById(id);
+		return new ResponseEntity<>("Recharge deleted succesfully", HttpStatus.OK);
+	}
 }
