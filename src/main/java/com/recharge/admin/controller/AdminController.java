@@ -2,6 +2,8 @@ package com.recharge.admin.controller;
 
 import java.util.List;
 
+import com.recharge.admin.entity.Subscription;
+import com.recharge.admin.payload.SubscribedPlansDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -51,5 +53,12 @@ public class AdminController {
 	public ResponseEntity<String> deletePost(@PathVariable(name = "id") long id) {
 		rechargePlanService.deleteRechargePlanById(id);
 		return new ResponseEntity<>("Recharge deleted succesfully", HttpStatus.OK);
+	}
+
+	// View Subscribed Plans
+	@GetMapping("/view-subscribed-plans/{username}")
+	public ResponseEntity<List<SubscribedPlansDto>> viewSubscribedPlans(@PathVariable(name = "username") String username) {
+		List<SubscribedPlansDto> response = rechargePlanService.getSubscribedPlans(username);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }
