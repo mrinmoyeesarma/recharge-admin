@@ -34,6 +34,8 @@ public class Subscription {
 	private int validity;
 	@Column(name = "rechargeStatus", nullable = false)
 	private String rechargeStatus;
+	@Column(name = "networkProvider", nullable = false)
+	private String networkProvider;
 
 	public long getRecharge_id() {
 		return recharge_id;
@@ -83,4 +85,11 @@ public class Subscription {
 		this.rechargeStatus = rechargeStatus;
 	}
 
+	public String getNetworkProvider() {
+		return networkProvider;
+	}
+
+	public void setNetworkProvider(String networkProvider) {
+		this.networkProvider = networkProvider;
+	}
 }

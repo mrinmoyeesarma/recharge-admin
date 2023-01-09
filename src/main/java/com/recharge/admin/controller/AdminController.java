@@ -1,8 +1,9 @@
-package com.recharge.admin.Controller;
+package com.recharge.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.recharge.admin.entity.Subscription;
+import com.recharge.admin.payload.SubscribedPlansDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.recharge.admin.entity.RechargePlan;
-import com.recharge.admin.payload.RechargePlanDto;
 import com.recharge.admin.service.RechargePlanService;
 
 @RestController
@@ -53,5 +53,12 @@ public class AdminController {
 	public ResponseEntity<String> deletePost(@PathVariable(name = "id") long id) {
 		rechargePlanService.deleteRechargePlanById(id);
 		return new ResponseEntity<>("Recharge deleted succesfully", HttpStatus.OK);
+	}
+
+	// View Subscribed Plans
+	@GetMapping("/view-subscribed-plans/{username}")
+	public ResponseEntity<List<SubscribedPlansDto>> viewSubscribedPlans(@PathVariable(name = "username") String username) {
+		List<SubscribedPlansDto> response = rechargePlanService.getSubscribedPlans(username);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }

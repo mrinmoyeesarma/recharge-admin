@@ -1,6 +1,11 @@
 package com.recharge.admin.service.impl;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import com.recharge.admin.entity.Subscription;
+import com.recharge.admin.payload.SubscribedPlansDto;
+import com.recharge.admin.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.recharge.admin.entity.RechargePlan;
@@ -12,10 +17,11 @@ import com.recharge.admin.service.RechargePlanService;
 @Service
 public class RechargePlanServiceImpl implements RechargePlanService {
 	private RechargePlanRepository rechargePlanRepository;
+	private SubscriptionRepository subscriptionRepository;
 
-	public RechargePlanServiceImpl(RechargePlanRepository rechargePlanRepository) {
-
+	public RechargePlanServiceImpl(RechargePlanRepository rechargePlanRepository, SubscriptionRepository subscriptionRepository) {
 		this.rechargePlanRepository = rechargePlanRepository;
+		this.subscriptionRepository = subscriptionRepository;
 	}
 
 	@Override
@@ -51,6 +57,19 @@ public class RechargePlanServiceImpl implements RechargePlanService {
 	
 		RechargePlan rechargePlan = rechargePlanRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("RechargePlan", "id", id));
 		rechargePlanRepository.delete(rechargePlan);
+	}
+
+	// Get Subscribed Plans
+	@Override
+	public List<SubscribedPlansDto> getSubscribedPlans(String username) {
+		List<Subscription> subscriptions = subscriptionRepository.findByUsername(username);
+		List<String> networkProviders = subscriptions.stream().map(subscription -> subscription.getNetworkProvider()).collect(Collectors.toList());
+		Set<String> distinctNetworkProviders = new HashSet<String>(networkProviders);
+		List<SubscribedPlansDto> subscribedPlansDtos = new ArrayList<>();
+		for (String provider: distinctNetworkProviders) {
+			subscribedPlansDtos.add(new SubscribedPlansDto(provider, Collections.frequency(networkProviders, provider)));
+		}
+		return subscribedPlansDtos;
 	}
 
 }
