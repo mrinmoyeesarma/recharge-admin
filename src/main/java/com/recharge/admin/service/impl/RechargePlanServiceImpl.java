@@ -14,15 +14,19 @@ import com.recharge.admin.payload.RechargePlanDto;
 import com.recharge.admin.repository.RechargePlanRepository;
 import com.recharge.admin.service.RechargePlanService;
 
+
 @Service
 public class RechargePlanServiceImpl implements RechargePlanService {
+	@Autowired
 	private RechargePlanRepository rechargePlanRepository;
+	@Autowired
 	private SubscriptionRepository subscriptionRepository;
+	@Autowired
 
-	public RechargePlanServiceImpl(RechargePlanRepository rechargePlanRepository, SubscriptionRepository subscriptionRepository) {
-		this.rechargePlanRepository = rechargePlanRepository;
-		this.subscriptionRepository = subscriptionRepository;
-	}
+//	public RechargePlanServiceImpl(RechargePlanRepository rechargePlanRepository, SubscriptionRepository subscriptionRepository) {
+//		this.rechargePlanRepository = rechargePlanRepository;
+//		this.subscriptionRepository = subscriptionRepository;
+//	}
 
 	@Override
 	// To fetch all the plans

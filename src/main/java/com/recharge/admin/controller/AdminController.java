@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.recharge.admin.entity.Subscription;
 import com.recharge.admin.payload.SubscribedPlansDto;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,11 +23,12 @@ import com.recharge.admin.service.RechargePlanService;
 @RestController
 @RequestMapping("api/posts")
 public class AdminController {
+	@Autowired
 	private RechargePlanService rechargePlanService;
 
-	public AdminController(RechargePlanService rechargePlanService) {
-		this.rechargePlanService = rechargePlanService;
-	}
+//	public AdminController(RechargePlanService rechargePlanService) {
+//		this.rechargePlanService = rechargePlanService;
+//	}
 
 	// get all the plans
 	@GetMapping
