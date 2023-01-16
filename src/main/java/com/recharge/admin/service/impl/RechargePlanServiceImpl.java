@@ -21,12 +21,6 @@ public class RechargePlanServiceImpl implements RechargePlanService {
 	private RechargePlanRepository rechargePlanRepository;
 	@Autowired
 	private SubscriptionRepository subscriptionRepository;
-	@Autowired
-
-//	public RechargePlanServiceImpl(RechargePlanRepository rechargePlanRepository, SubscriptionRepository subscriptionRepository) {
-//		this.rechargePlanRepository = rechargePlanRepository;
-//		this.subscriptionRepository = subscriptionRepository;
-//	}
 
 	@Override
 	// To fetch all the plans
